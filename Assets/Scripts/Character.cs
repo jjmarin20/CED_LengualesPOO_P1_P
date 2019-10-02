@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
     public Transform spawnPosition;
     public Rigidbody cannonBall;
     public float force = 5F;
+    public ParticleSystem ps;
 
     public int hp;
 
@@ -23,9 +24,10 @@ public class Character : MonoBehaviour
     public void ApplyDamage(int damageValue)
     {
         hp -= damageValue;
-
+        
         if (hp <= 0)
         {
+            Instantiate<ParticleSystem>(ps, transform.position, ps.transform.rotation).Play();
             Destroy(gameObject);
             SceneManager.LoadScene("Over", LoadSceneMode.Single);
         }
